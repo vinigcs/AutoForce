@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios | AutoForce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>AutoForce</h1>
+        <p>Relatórios e Indicadores</p>
+    </header>
+
+    <main>
+        <h2>Painel de Relatórios</h2>
+
+        <section>
+            <h3>Ordens de Serviço</h3>
+
+            <p>OS abertas: <strong>{{ os_abertas }}</strong></p>
+            <p>OS em execução: <strong>{{ os_execucao }}</strong></p>
+            <p>OS finalizadas: <strong>{{ os_finalizadas }}</strong></p>
+            <p>Total de OS cadastradas: <strong>{{ total_os }}</strong></p>
+        </section>
+
+        <hr>
+
+        <section>
+            <h3>Faturamento</h3>
+
+            <p>Valor total das Ordens de Serviço:</p>
+            <h2>R$ {{ "%.2f"|format(faturamento) }}</h2>
+        </section>
+
+        <hr>
+
+        <section>
+            <h3>Peças com Estoque Baixo</h3>
+
+            {% if pecas_baixo_estoque %}
+                {% for peca in pecas_baixo_estoque %}
+                    <p>
+                        {{ peca.nome }} —
+                        Estoque: {{ peca.quantidade }} unidades
+                    </p>
+                {% endfor %}
+            {% else %}
+                <p>Nenhuma peça com estoque baixo.</p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section>
+            <h3>Últimas Movimentações do Estoque</h3>
+
+            {% if movimentacoes %}
+                {% for movimento in movimentacoes %}
+                    <p>
+                        {{ movimento.tipo }} —
+                        {{ movimento.nome }} —
+                        {{ movimento.quantidade }} unidades —
+                        {{ movimento.data_movimentacao }}
+                    </p>
+                {% endfor %}
+            {% else %}
+                <p>Nenhuma movimentação registrada.</p>
+            {% endif %}
+        </section>
+
+        <br>
+
+        <a href="{{ url_for('inicio') }}">Voltar ao início</a>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes | AutoForce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>AutoForce</h1>
+        <p>Gestão de Clientes</p>
+    </header>
+
+    <main>
+        <h2>Cadastrar Cliente</h2>
+        <p>Preencha os dados abaixo para cadastrar um novo cliente.</p>
+
+        <form action="{{ url_for('clientes') }}" method="POST">
+            <label>Nome completo:</label><br>
+            <input type="text" name="nome" required><br><br>
+
+            <label>CPF:</label><br>
+            <input type="text" name="cpf"><br><br>
+
+            <label>Telefone:</label><br>
+            <input type="text" name="telefone" required><br><br>
+
+            <label>E-mail:</label><br>
+            <input type="email" name="email"><br><br>
+
+            <button type="submit">Cadastrar Cliente</button>
+        </form>
+
+        <hr>
+
+        <h2>Clientes cadastrados</h2>
+
+        {% if clientes %}
+            {% for cliente in clientes %}
+                <section>
+                    <h3>{{ cliente.nome }}</h3>
+                    <p>CPF: {{ cliente.cpf or 'Não informado' }}</p>
+                    <p>Telefone: {{ cliente.telefone }}</p>
+                    <p>E-mail: {{ cliente.email or 'Não informado' }}</p>
+
+                    <br>
+
+                    <a href="{{ url_for('editar_cliente', id=cliente.id) }}">
+                        <button type="button">Editar</button>
+                    </a>
+
+                    <form action="{{ url_for('excluir_cliente', id=cliente.id) }}" method="POST"
+                          onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </section>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum cliente cadastrado.</p>
+        {% endif %}
+
+        <br>
+        <a href="/">Voltar ao início</a>
+
+    </main>
+
+</body>
+</html>

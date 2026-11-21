@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentação de Estoque | AutoForce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>AutoForce</h1>
+        <p>Movimentação de Estoque</p>
+    </header>
+
+    <main>
+        <h2>Registrar Movimentação</h2>
+        <p>Registre entradas e saídas de peças do estoque.</p>
+
+        <form action="{{ url_for('estoque') }}" method="POST">
+
+            <label>Peça:</label><br>
+            <select name="peca_id" required>
+                <option value="">Selecione uma peça</option>
+                {% for peca in pecas %}
+                    <option value="{{ peca.id }}">
+                        {{ peca.nome }} - Estoque: {{ peca.quantidade }}
+                    </option>
+                {% endfor %}
+            </select><br><br>
+
+            <label>Tipo de movimentação:</label><br>
+            <select name="tipo" required>
+                <option value="">Selecione</option>
+                <option value="Entrada">Entrada</option>
+                <option value="Saida">Saída</option>
+            </select><br><br>
+
+            <label>Quantidade:</label><br>
+            <input type="number" name="quantidade" min="1" required><br><br>
+
+            <label>Descrição:</label><br>
+            <textarea name="descricao" rows="3"
+                placeholder="Ex.: Compra de mercadorias ou venda de peça"></textarea><br><br>
+
+            <button type="submit">Registrar Movimentação</button>
+
+        </form>
+
+        <hr>
+
+        <h2>Histórico de Movimentações</h2>
+
+        {% if movimentacoes %}
+            {% for movimentacao in movimentacoes %}
+                <section>
+                    <h3>{{ movimentacao.peca_nome }}</h3>
+                    <p>Tipo: {{ movimentacao.tipo }}</p>
+                    <p>Quantidade: {{ movimentacao.quantidade }}</p>
+                    <p>Data: {{ movimentacao.data_movimentacao }}</p>
+                    <p>Descrição: {{ movimentacao.descricao or 'Não informada' }}</p>
+                </section>
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma movimentação registrada.</p>
+        {% endif %}
+
+        <br>
+        <a href="/">Voltar ao início</a>
+
+    </main>
+
+</body>
+</html>

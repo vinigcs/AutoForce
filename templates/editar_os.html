@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Ordem de Serviço | AutoForce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>AutoForce</h1>
+        <p>Editar Ordem de Serviço</p>
+    </header>
+
+    <main>
+
+        <h2>Editar OS #{{ ordem.id }}</h2>
+
+        <form action="{{ url_for('editar_os', id=ordem.id) }}" method="POST">
+
+            <label>Veículo:</label><br>
+            <select name="veiculo_id" required>
+                {% for veiculo in veiculos %}
+                    <option value="{{ veiculo.id }}"
+                        {% if veiculo.id == ordem.veiculo_id %}selected{% endif %}>
+                        {{ veiculo.marca }} {{ veiculo.modelo }} - {{ veiculo.placa }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+
+            <label>Funcionário responsável:</label><br>
+            <select name="funcionario_id">
+                <option value="">Não definido</option>
+
+                {% for funcionario in funcionarios %}
+                    <option value="{{ funcionario.id }}"
+                        {% if funcionario.id == ordem.funcionario_id %}selected{% endif %}>
+                        {{ funcionario.nome }} - {{ funcionario.cargo }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+
+            <label>Data de entrada:</label><br>
+            <input type="date" name="data_entrada"
+                   value="{{ ordem.data_entrada }}" required>
+
+            <br><br>
+
+            <label>Descrição do problema:</label><br>
+            <textarea name="descricao_problema" required>{{ ordem.descricao_problema }}</textarea>
+
+            <br><br>
+
+            <label>Valor da mão de obra (R$):</label><br>
+            <input type="number" name="valor_mao_obra"
+                   step="0.01" min="0"
+                   value="{{ ordem.valor_mao_obra }}" required>
+
+            <br><br>
+
+            <button type="submit">Salvar Alterações</button>
+
+        </form>
+
+        <br>
+
+        <a href="{{ url_for('ordens_servico') }}">Cancelar e voltar</a>
+
+    </main>
+
+</body>
+</html>

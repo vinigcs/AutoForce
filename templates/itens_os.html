@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peças utilizadas | AutoForce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>AutoForce</h1>
+        <p>Peças utilizadas nas Ordens de Serviço</p>
+    </header>
+
+    <main>
+        <h2>Adicionar Peça à Ordem de Serviço</h2>
+        <p>Registre as peças utilizadas durante os serviços da oficina.</p>
+
+        <form action="{{ url_for('itens_os') }}" method="POST">
+
+            <label>Ordem de Serviço:</label><br>
+            <select name="ordem_servico_id" required>
+                <option value="">Selecione uma ordem</option>
+                {% for ordem in ordens %}
+                    <option value="{{ ordem.id }}">
+                        OS #{{ ordem.id }} - {{ ordem.marca }}
+                        {{ ordem.modelo }} - {{ ordem.placa }}
+                    </option>
+                {% endfor %}
+            </select><br><br>
+
+            <label>Peça:</label><br>
+            <select name="peca_id" required>
+                <option value="">Selecione uma peça</option>
+                {% for peca in pecas %}
+                    <option value="{{ peca.id }}">
+                        {{ peca.nome }} - Estoque: {{ peca.quantidade }}
+                    </option>
+                {% endfor %}
+            </select><br><br>
+
+            <label>Quantidade utilizada:</label><br>
+            <input type="number" name="quantidade" min="1" required><br><br>
+
+            <button type="submit">Adicionar Peça à OS</button>
+
+        </form>
+
+        <hr>
+
+        <h2>Peças utilizadas</h2>
+
+        {% if itens %}
+            {% for item in itens %}
+                <section>
+                    <h3>Ordem de Serviço #{{ item.ordem_servico_id }}</h3>
+                    <p>Peça: {{ item.peca_nome }}</p>
+                    <p>Quantidade: {{ item.quantidade }}</p>
+                    <p>Valor unitário: R$ {{ "%.2f"|format(item.valor_unitario) }}</p>
+                    <p>Total: R$ {{ "%.2f"|format(item.quantidade * item.valor_unitario) }}</p>
+                </section>
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma peça vinculada a uma Ordem de Serviço.</p>
+        {% endif %}
+
+        <br>
+        <a href="/">Voltar ao início</a>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoForce | Painel Administrativo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>AutoForce</h1>
+        <p>Painel Administrativo</p>
+    </header>
+
+    <main>
+        <h2>Bem-vindo ao AutoForce!</h2>
+        <p>Gerencie sua oficina mecânica e sua loja de autopeças em um só lugar.</p>
+
+        <section>
+            <h3>Gestão de Clientes</h3>
+            <p>Cadastre, consulte e edite seus clientes.</p>
+            <a href="{{ url_for('clientes') }}">Acessar clientes</a>
+        </section>
+
+        <section>
+            <h3>Veículos</h3>
+            <p>Gerencie os carros e motocicletas cadastrados.</p>
+            <a href="{{ url_for('veiculos') }}">Acessar veículos</a>
+        </section>
+
+        <section>
+            <h3>Funcionários</h3>
+            <p>Gerencie os funcionários da oficina.</p>
+            <a href="{{ url_for('funcionarios') }}">Acessar funcionários</a>
+        </section>
+
+        <section>
+            <h3>Ordens de Serviço</h3>
+            <p>Cadastre e acompanhe os serviços da oficina.</p>
+            <a href="{{ url_for('ordens_servico') }}">Acessar ordens de serviço</a>
+        </section>
+
+        <section>
+            <h3>Peças e Estoque</h3>
+            <p>Gerencie as peças e consulte o estoque.</p>
+            <a href="{{ url_for('pecas') }}">Acessar peças</a>
+            <a href="{{ url_for('estoque') }}">Movimentar estoque</a>
+        </section>
+
+        <section>
+            <h3>Peças utilizadas</h3>
+            <p>Consulte e registre peças utilizadas nas ordens.</p>
+            <a href="{{ url_for('itens_os') }}">Acessar peças utilizadas</a>
+        </section>
+
+        <section>
+            <h3>Relatórios</h3>
+            <p>Visualize os indicadores e movimentações da oficina.</p>
+            <a href="{{ url_for('relatorios') }}">Acessar relatórios</a>
+        </section>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cliente | AutoForce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>AutoForce</h1>
+        <p>Editar cadastro de cliente</p>
+    </header>
+
+    <main>
+        <h2>Editar Cliente</h2>
+        <p>Altere as informações do cliente abaixo.</p>
+
+        <form method="POST">
+            <label>Nome completo:</label><br>
+            <input type="text" name="nome" value="{{ cliente.nome }}" required><br><br>
+
+            <label>CPF:</label><br>
+            <input type="text" name="cpf" value="{{ cliente.cpf or '' }}"><br><br>
+
+            <label>Telefone:</label><br>
+            <input type="text" name="telefone" value="{{ cliente.telefone }}" required><br><br>
+
+            <label>E-mail:</label><br>
+            <input type="email" name="email" value="{{ cliente.email or '' }}"><br><br>
+
+            <button type="submit">Salvar alterações</button>
+        </form>
+
+        <br>
+        <a href="{{ url_for('clientes') }}">Voltar para clientes</a>
+    </main>
+
+</body>
+</html>
