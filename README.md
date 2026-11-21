@@ -2,14 +2,16 @@
 
 **Sistema web para gerenciamento de oficinas mecânicas e lojas de autopeças.**
 
-## Sobre o projeto
+## 1. Sobre o projeto
 
-O AutoForce é um sistema desenvolvido com o objetivo de facilitar a administração de oficinas mecânicas e lojas de autopeças, centralizando informações de clientes, veículos, funcionários, peças, estoque e ordens de serviço.
+O AutoForce é um sistema desenvolvido para facilitar a administração de oficinas mecânicas e lojas de autopeças, centralizando informações de clientes, veículos, funcionários, peças, estoque e ordens de serviço.
 
-## Funcionalidades
+Projeto acadêmico desenvolvido no Centro Universitário dos Guararapes (UNIFG).
+
+## 2. Funcionalidades
 
 - Cadastro, consulta, edição e exclusão de clientes.
-- Cadastro, consulta, edição e exclusão de veículos.
+- Gerenciamento de veículos.
 - Cadastro e gerenciamento de funcionários.
 - Cadastro e gerenciamento de peças.
 - Controle de entrada e saída de estoque.
@@ -18,9 +20,9 @@ O AutoForce é um sistema desenvolvido com o objetivo de facilitar a administra�
 - Adição de peças às ordens de serviço.
 - Baixa automática de peças utilizadas no estoque.
 - Atualização do status das ordens de serviço.
-- Relatórios e indicadores administrativos.
+- Relatórios administrativos.
 
-## Tecnologias utilizadas
+## 3. Tecnologias utilizadas
 
 - Python
 - Flask
@@ -30,9 +32,9 @@ O AutoForce é um sistema desenvolvido com o objetivo de facilitar a administra�
 - JavaScript
 - Fetch API
 
-## Banco de dados
+## 4. Banco de dados
 
-O sistema utiliza SQLite e possui sete tabelas principais:
+O sistema utiliza SQLite, com sete tabelas principais:
 
 1. Clientes
 2. Veículos
@@ -42,9 +44,11 @@ O sistema utiliza SQLite e possui sete tabelas principais:
 6. Itens de ordem de serviço
 7. Movimentações de estoque
 
-O banco de dados utiliza relacionamentos e chaves estrangeiras para manter a integridade das informações.
+O banco de dados e suas tabelas são criados automaticamente durante a inicialização do sistema.
 
-## API
+O arquivo do banco de dados é local e não precisa ser enviado ao GitHub.
+
+## 5. API
 
 O projeto possui uma API desenvolvida com Flask, localizada no arquivo `api.py`.
 
@@ -55,9 +59,14 @@ A API disponibiliza operações para gerenciamento de veículos:
 - PUT: atualizar veículos.
 - DELETE: excluir veículos.
 
-A interface do módulo de veículos consome a API utilizando JavaScript e Fetch API, com comunicação por meio de dados JSON.
+A interface do módulo de veículos consome a API utilizando JavaScript e Fetch API, com comunicação por dados JSON.
 
-## Como executar o projeto
+## 6. Como executar o projeto
+
+### Requisitos
+
+- Python instalado.
+- Git instalado ou possibilidade de baixar o projeto pelo GitHub.
 
 ### 1. Clonar o repositório
 
@@ -71,29 +80,27 @@ git clone https://github.com/vinigcs/AutoForce.git
 cd AutoForce
 ```
 
-### 3. Criar ambiente virtual
+### 3. Criar o ambiente virtual
 
 ```bash
 python -m venv venv
 ```
 
-### 4. Ativar ambiente virtual
-
-No Windows:
+### 4. Ativar o ambiente virtual (Windows)
 
 ```bash
 venv\Scripts\activate
 ```
 
-### 5. Instalar dependências
+### 5. Instalar as dependências
 
 ```bash
-pip install flask
+pip install -r requirements.txt
 ```
 
 ### 6. Iniciar a aplicação web
 
-Em um terminal:
+Em um primeiro terminal:
 
 ```bash
 python app.py
@@ -101,7 +108,7 @@ python app.py
 
 ### 7. Iniciar a API
 
-Em outro terminal:
+Em um segundo terminal, com o ambiente virtual ativado:
 
 ```bash
 python api.py
@@ -117,14 +124,14 @@ API de veículos:
 
 http://127.0.0.1:5001/api/veiculos
 
-## Desenvolvedores
+**Importante:** os dois servidores precisam permanecer em execução para o funcionamento completo do sistema.
+
+## 7. Desenvolvedores
 
 Projeto acadêmico desenvolvido no Centro Universitário dos Guararapes (UNIFG).
 
 Orientador: Prof. Me. Petros Barreto da Silva.
 
-## Status do projeto
+## 8. Status do projeto
 
-**Concluído para fins acadêmicos.**
-
-O sistema possui interface web, API integrada ao módulo de veículos e banco de dados SQLite, com funcionalidades de gerenciamento de clientes, veículos, funcionários, peças, estoque e ordens de serviço.
+Projeto desenvolvido para fins acadêmicos, contendo interface web, API integrada ao módulo de veículos e banco de dados SQLite.
